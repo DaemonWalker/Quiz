@@ -1,0 +1,16 @@
+﻿@if (Option.IsMuiltySelection)
+{
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="@(GetID())" name="@(Option.GroupName)" />
+        <label class="form-check-label" for="@(GetID())">
+            @Option.Content
+        </label>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public OptionModel Option { get; set; }
+
+    private string GetID() => Option.IsMuiltySelection ? $"chk{Option.ID}" : $"radio{Option.ID}";
+}

@@ -1,0 +1,19 @@
+﻿<div>
+    <fieldset class="form-group">
+            <legend class="row col-form-label col pt-0">@($"{Index}. {Question.Content}")</legend>
+            <div class="col">
+               @foreach(var option in Question.Options)
+               {
+                   <ControlOption Option="option"></ControlOption>
+               }
+            </div>
+    </fieldset>
+</div>
+
+@code {
+    [Parameter]
+    public QuestionModel Question { get; set; }
+
+    [Parameter]
+    public int Index { get; set; }
+}

@@ -1,0 +1,27 @@
+﻿@inject IExamLogic examLogic
+
+@if (ExamModel != null)
+{
+    <h1>@ExamModel.Name</h1>
+    for (var i = 0; i < ExamModel.Questions.Count; i++)
+    {
+        <ControlQuestion Question="ExamModel.Questions[i]" Index="i"></ControlQuestion>
+    }
+    <button @onclick="Submit">提交</button>
+}
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+    private ExamModel ExamModel { get; set; }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        ExamModel = await examLogic.GetExamByIDAsync(ID));
+    }
+
+    private async Task Submit()
+    {
+        await examLogic.SubmitExamAsync(ExamModel);
+    }
+}
